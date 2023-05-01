@@ -36,65 +36,38 @@ if ($methode == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include '../tpl/header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/event_delete-unsuscruble.css">
-    <title>Modifier un évènement</title>
-</head>
+<div class="form">
+    <h2>Modifier un évènement</h2>
 
-<body>
+    <form method="post" action="event_update.php">
+        <div class="create">
 
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="#">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="form">
-        <h2>Modifier un évènement</h2>
-
-        <form method="post" action="event_update.php">
-            <div class="create">
-
-                <div class="inputForm">
-
-                    <div>
-                        <label for="name_event_update">Nom : </label>
-                        <input type="text" name="name_event_update" id="name_event_update" value="<?= $name ?>" required>
-                    </div>
-
-                    <div>
-                        <label for="date_event_update">Date de l'événement : </label>
-                        <input type="date" name="date_event_update" id="date_event_update" value="<?= $date_event ?>" required>
-                    </div>
-                </div>
-
-                <input type="hidden" name="id" value="<?= $id ?>" />
-                <input type="hidden" name="name_event" value="<?= $name ?>" />
-                <input type="hidden" name="date_event" value="<?= $date_event ?>" />
+            <div class="inputForm">
 
                 <div>
-                    <button><a class="btn" href="dashboard_admin.php">Retour</a></button>
-                    <input type="submit" name="updated" value="Mettre à jour" />
+                    <label for="name_event_update">Nom : </label>
+                    <input type="text" name="name_event_update" id="name_event_update" value="<?= $name ?>" required>
+                </div>
+
+                <div>
+                    <label for="date_event_update">Date de l'événement : </label>
+                    <input type="date" name="date_event_update" id="date_event_update" value="<?= $date_event ?>" required>
                 </div>
             </div>
-        </form>
 
-    </div>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
+            <input type="hidden" name="id" value="<?= $id ?>" />
+            <input type="hidden" name="name_event" value="<?= $name ?>" />
+            <input type="hidden" name="date_event" value="<?= $date_event ?>" />
 
-</html>
+            <div>
+                <button><a class="btn" href="dashboard_admin.php">Retour</a></button>
+                <input type="submit" name="updated" value="Mettre à jour" />
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<?php include '../tpl/footer.php'; ?>

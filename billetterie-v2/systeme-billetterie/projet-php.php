@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 $methode = filter_input(INPUT_SERVER, "REQUEST_METHOD");
@@ -62,19 +62,18 @@ if ($methode == "GET" && isset($_GET["Confirmer"])) {
     }
 </style>
 
-<body>
-    <form method="GET" action="Projet-PHP.php">
+<?php include '../tpl/header.php'; ?>
 
-        <label for="username">Nom </label>
-        <input type="text" name="username" id="username" required>
+<form method="GET" action="Projet-PHP.php">
 
-        <label for="publicCode"> Code public billet</label>
-        <input type="text" name="publicCode" id="publicCode" maxlength="30" required>
+    <label for="username">Nom </label>
+    <input type="text" name="username" id="username" required>
 
-        <input type="submit" name="Confirmer" value="Confirmer">
+    <label for="publicCode"> Code public billet</label>
+    <input type="text" name="publicCode" id="publicCode" maxlength="30" required>
 
-    </form>
+    <input type="submit" name="Confirmer" value="Confirmer">
 
-</body>
+</form>
 
-</html>
+<?php include '../tpl/footer.php'; ?>

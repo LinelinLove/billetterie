@@ -110,60 +110,36 @@ function print_inscrit($id_event, $affichage, $event_id, $name_event)
                     </td>
                 </tr>
             <?php } ?>
-    <?php } else {
+        </table>
+
+<?php } else {
         echo "Personne d'inscrit pour cet évènement";
     }
 } ?>
 
 
-    <!-- html -->
+<?php
+$titre = $name_event;
+include '../tpl/header.php';
+?>
 
-    <!DOCTYPE html>
-    <html lang="fr">
+<div class="event_read_div_back">
+    <p><a href="dashboard_user.php">Retour</a></p>
+</div>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style/event_read.css">
-        <title>Liste des inscrit</title>
-    </head>
+<div class="event_read_container">
+    <div class="print_events">
+        <h2>Liste des inscrits à l'évènement
+            '<?php echo $name_event ?>' :
+        </h2>
 
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="#">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-        <div>
-            <a href="logout_admin.php">Déconnexion</a>
-        </div>
-    </header>
+        <?php
+        print_inscrit($id_event, $affichage, $event_id, $name_event);
+        ?>
 
-    <body>
-        <div>
-            <a href="dashboard_admin.php">Retour</a>
-        </div>
-        <h1>Bonjour
-            <?= $login ?> !
-        </h1>
+    </div>
+</div>
 
-        <div class="print_events">
-            <h2>Liste des inscrit à
-                <?php echo $name_event ?>:
-            </h2>
-
-            <?php
-            print_inscrit($id_event, $affichage, $event_id, $name_event);
-            ?>
-
-        </div>
-        <footer>
-            <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-        </footer>
-    </body>
-
-    </html>
+<?php
+include '../tpl/footer.php';
+?>

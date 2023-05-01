@@ -1,12 +1,10 @@
 <?php
 session_start();
-// setcookie('localhost', '', time() - 3600, '/');
 
 require "ticket_generation.php";
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    // Dans ce cas là, la personne n'est pas connectée, on la redirige.
     header('Location: ../systeme-authentification/users/login.php');
-    exit(); // Coupe PHP
+    exit();
 }
 
 $pdo = new PDO("mysql:host=localhost:3306;dbname=billetterie_hetic", "root", "");
@@ -151,64 +149,35 @@ if ($methode == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en-fr">
+<?php include '../tpl/header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
-    <link rel="stylesheet" href="style/inscription.css">
-</head>
+<h1>Inscrire un client à l'évènement
+</h1>
+<?php if ($erreur !== null) : ?>
+    <p style="background: #FAA; color: red; padding: .5rem .75rem">
+        <?= $erreur ?>
+    </p>
+<?php endif; ?>
+<form method="POST">
+
+    <label for="first_name">Prénom</label>
+    <input type="text" id="first_name" name="first_name">
+
+    <label for="last_name">Nom</label>
+    <input type="text" id="last_name" name="last_name">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email">
+
+    <label for="phone_number">Numero de telephone</label>
+    <input type="text" id="phone_number" name="phone_number">
+    <input type="hidden" name="name_event" value="<?php echo $name_event; ?>">
+    <input type="hidden" name="id" value="<?php echo $event_id; ?>">
+    <input type="submit" name="inscrire" value="Inscrire">
+</form>
+<div>
+    <a href="dashboard_admin.php">Retour</a>
+</div>
 
 
-<body>
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="#">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-        <div>
-            <a href="logout_admin.php">Déconnexion</a>
-        </div>
-    </header>
-
-    <h1>Inscrire un client à l'évènement
-    </h1>
-    <?php if ($erreur !== null) : ?>
-        <p style="background: #FAA; color: red; padding: .5rem .75rem">
-            <?= $erreur ?>
-        </p>
-    <?php endif; ?>
-    <form method="POST">
-
-        <label for="first_name">Prénom</label>
-        <input type="text" id="first_name" name="first_name">
-
-        <label for="last_name">Nom</label>
-        <input type="text" id="last_name" name="last_name">
-
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-
-        <label for="phone_number">Numero de telephone</label>
-        <input type="text" id="phone_number" name="phone_number">
-        <input type="hidden" name="name_event" value="<?php echo $name_event; ?>">
-        <input type="hidden" name="id" value="<?php echo $event_id; ?>">
-        <input type="submit" name="inscrire" value="Inscrire">
-    </form>
-    <div>
-        <a href="dashboard_admin.php">Retour</a>
-    </div>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
-
-</html>
+<?php include '../tpl/footer.php'; ?>

@@ -141,6 +141,4 @@ function isValidPhone_number($phone_number)
     <div>
         <a href="login.php">Retour</a>
     </div>
-</body>
-
-</html>
+    <?php include '../../tpl/footer.php'; ?>

@@ -1,14 +1,9 @@
 <?php
 
-// session_start();
-
 $pdo = new PDO("mysql:host=localhost:3306;dbname=billetterie_hetic", "root", "");
 
 $username = filter_input(INPUT_POST, "last_name");
 $privateCode = filter_input(INPUT_POST, "pTicketId");
-//$username = "Master";
-//$privateCode = "code1";
-
 
 $request_ticket = $pdo->prepare("
 SELECT u.last_name, u.first_name, u.email, e.name, e.date_event, e.date_create, e.qrcode 
@@ -25,8 +20,6 @@ $request_ticket->execute(array(
     ":private_code" => $privateCode
 ));
 $tickets = $request_ticket->fetchAll(PDO::FETCH_ASSOC);
-
-//echo var_dump($tickets);
 
 function showTickets($tickets)
 {
@@ -67,44 +60,36 @@ if (isset($_POST["form_ticket"])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/show_ticket.css">
-    <title>Document</title>
-</head>
+<?php
+$titre = "Votre billet";
+include '../tpl/header.php';
+?>
 
-<body>
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="show_ticket.php">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div>
-        <h2>Entrer votre billet</h2>
-        <form method="POST" action="show_ticket_client.php">
-            <label for="last_name">Identifiant</label>
-            <input type="text" id="last_name" name="last_name">
-            <label for="pTicketId">Identifiant privé du billet</label>
-            <input type="text" id="pTicketId" name="pTicketId">
+<section class="show_ticket_container">
 
-            <input type="submit" name="form_ticket" value="Afficher mon billet">
+    <h1>Votre billet</h1>
 
-        </form>
-    </div>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
+    <form method="POST" action="show_ticket_client.php" class="show_ticket_form">
 
-</html>
+        <div class="show_ticket_div">
+            <div class="show_ticket_form_input">
+                <label for="last_name">Nom de famille :</label>
+                <label for="pTicketId">Identifiant privé du billet :</label>
+            </div>
+
+            <div class="show_ticket_form_input">
+                <input type="text" id="last_name" name="last_name">
+                <input type="text" id="pTicketId" name="pTicketId" maxlength="10">
+            </div>
+        </div>
+
+        <div class="show_ticket_button">
+            <input type="submit" name="form_ticket" value="Afficher mon billet" class="show_ticket_btn">
+        </div>
+
+    </form>
+
+</section>
+
+<?php include '../tpl/footer.php'; ?>

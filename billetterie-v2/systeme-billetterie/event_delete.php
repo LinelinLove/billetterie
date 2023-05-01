@@ -30,38 +30,26 @@ if ($methode == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php include '../tpl/header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
-    <title>Annuler un évènement</title>
-</head>
+<div class="form">
+    <h2>Annuler un évènement</h2>
+    <div class="cancelled">
+        <p class="text_cancelled">
+            Êtes-vous sûr de vouloir annuler cet évènement <?= $id ?> ?
+        </p>
+    </div>
 
-<body>
-    <div class="form">
-        <h2>Annuler un évènement</h2>
-        <div class="cancelled">
-            <p class="text_cancelled">
-                Êtes-vous sûr de vouloir annuler cet évènement <?= $id ?> ?
-            </p>
+    <form method="POST" action="event_delete.php">
+        <input type="hidden" name="id" value="<?= $id ?>" />
+        <div>
+            <button>
+                <a href="dashboard_admin.php">Retour</a>
+            </button>
+            <input type="submit" name="cancelled" value="Annuler" />
         </div>
+</div>
 
-        <form method="POST" action="event_delete.php">
-            <input type="hidden" name="id" value="<?= $id ?>" />
-            <div>
-                <button>
-                    <a href="dashboard_admin.php">Retour</a>
-                </button>
-                <input type="submit" name="cancelled" value="Annuler" />
-            </div>
-    </div>
-
-    </form>
-    </div>
-</body>
-
-</html>
+</form>
+</div>
+<?php include '../tpl/footer.php'; ?>

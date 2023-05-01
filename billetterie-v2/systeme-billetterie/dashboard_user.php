@@ -2,15 +2,13 @@
 session_start();
 $pdo = new PDO("mysql:host=localhost:3306;dbname=billetterie_hetic;charset=utf8", "root", "");
 
-// Première chose, si la personne n'est pas connectée, c'est dangereux de lui afficher la page sécurisée. On la renvoie vers le login.
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    // Dans ce cas là, la personne n'est pas connectée, on la redirige.
+
     header('Location: ../systeme-authentification/users/login.php');
-    exit(); // Coupe PHP
+    exit();
 }
+
 $login = $_SESSION["login"];
-
-
 
 if (isset($_GET['sort'])) {
     $sort = $_GET['sort'];
@@ -47,8 +45,6 @@ $requete_admins->execute();
 
 $user = $requete_admins->fetchAll(PDO::FETCH_ASSOC);
 
-// echo var_dump($user);
-
 function print_events($evenements, $order, $login)
 {
     if (count($evenements) > 0) {
@@ -57,12 +53,12 @@ function print_events($evenements, $order, $login)
             <thead>
                 <tr>
                     <th><a href="?sort=id&order=<?php echo $order; ?>">id</a></th>
-                    <th><a href="?sort=name&order=<?php echo $order; ?>">Nom de l'évènement</a></th>
-                    <th><a href="?sort=type&order=<?php echo $order; ?>">Type de l'évènement</a></th>
-                    <th><a href="?sort=date_event&order=<?php echo $order; ?>">Date de l'évènement</a></th>
+                    <th><a href="?sort=name&order=<?php echo $order; ?>">Nom</a></th>
+                    <th><a href="?sort=type&order=<?php echo $order; ?>">Type</a></th>
+                    <th><a href="?sort=date_event&order=<?php echo $order; ?>">Date</a></th>
                     <th><a href="?sort=date_create&order=<?php echo $order; ?>">Date de création</a></th>
                     <th><a href="?sort=creator&order=<?php echo $order; ?>">Auteur</a></th>
-                    <th><a href="?sort=status&order=<?php echo $order; ?>">Status</a></th>
+                    <th><a href="?sort=status&order=<?php echo $order; ?>">Statut</a></th>
                     <th>Éditions</th>
                     <th>Inscription</th>
 
@@ -140,49 +136,23 @@ function print_events($evenements, $order, $login)
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/dashoboard_admin.css">
-    <title>Votre espace</title>
-</head>
+<?php
+$titre = "Dashboard";
+include '../tpl/header.php';
+?>
 
-<body>
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="#">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-        <div>
-            <a href="../systeme-authentification/users/logout.php">Déconnexion</a>
-        </div>
-    </header>
+<div class="dashboard_user_container">
 
-    <div class="body_event">
-        <h1>Bonjour '<?= $login ?>' !</h1>
+    <h1>Bonjour <?= $login ?> !</h1>
 
-        <div>
-            <button>
-                <a href="create_event.php" class="button_event">Créer un évènement</a>
-            </button>
-        </div>
-        <div class="print_events">
-            <h2>Liste des évènements :</h2>
-            <?= print_events($evenements, $order, $login) ?>
-        </div>
+    <div class="print_events">
+        <h2>Liste des évènements :</h2>
+        <?= print_events($evenements, $order, $login) ?>
     </div>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
+    <button class="dashboard_event_create">
+        <a href="event_create.php">Créer un évènement</a>
+    </button>
+</div>
 
-</html>
+<?php include '../tpl/footer.php'; ?>

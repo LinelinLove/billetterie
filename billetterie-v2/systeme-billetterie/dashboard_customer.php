@@ -26,15 +26,13 @@ if ($methode == "POST") {
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
 
     if (password_verify($password, $utilisateur["password"])) {
-        // Yay, les identifiants sont corrects :
+        // identifiants sont corrects :
         // 1. On définit la clef loggedin à true dans la session : permet de savoir si ce navigateur est bien passé par le formulaire de connexion et a bien pu se connecter
         $_SESSION["loggedin"] = true;
 
-        // 2. On redirige
-        // Quand on redirige, c'est une bonne pratique de couper PHP
-        // directement après.
+        // 2. On redirige, quand on redirige, c'est une bonne pratique de couper PHP directement après.
         header('Location: dashboard_admin.php');
-        exit(); // Coupe PHP
+        exit();
     } else {
         $erreur = "Identifiants incorrects !";
     }
@@ -74,12 +72,12 @@ function print_events($evenements, $order)
         <table>
             <thead>
                 <tr>
-                    <th><a href="?sort=name&order=<?php echo $order; ?>">Nom de l'évènement</a></th>
-                    <th><a href="?sort=type&order=<?php echo $order; ?>">Type de l'évènement</a></th>
-                    <th><a href="?sort=date_event&order=<?php echo $order; ?>">Date de l'évènement</a></th>
+                    <th><a href="?sort=name&order=<?php echo $order; ?>">Nom</a></th>
+                    <th><a href="?sort=type&order=<?php echo $order; ?>">Type</a></th>
+                    <th><a href="?sort=date_event&order=<?php echo $order; ?>">Date</a></th>
                     <th><a href="?sort=date_create&order=<?php echo $order; ?>">Date de création</a></th>
                     <th><a href="?sort=creator&order=<?php echo $order; ?>">Auteur</a></th>
-                    <th><a href="?sort=status&order=<?php echo $order; ?>">Status</a></th>
+                    <th><a href="?sort=status&order=<?php echo $order; ?>">Statut</a></th>
                 </tr>
             </thead>
             <?php
@@ -113,38 +111,16 @@ function print_events($evenements, $order)
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$titre = "Dashboard";
+include '../tpl/header.php'; 
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="style/login_client.css">
-</head>
-
-<body>
-
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="#">Billets</a></li>
-                <li><a href="../systeme-authentification/users/login.php">Admin</a></li>
-                <li><a href="dashboard_admin.php">Dashboard</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="print_events">
-        <h2>Liste des évènements :</h2>
+<div class="print_events">
+    <h2>Liste des évènements :</h2>
+    <div>
         <?= print_events($evenements, $order) ?>
     </div>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
+</div>
 
-</html>
+<?php include '../tpl/footer.php'; ?>

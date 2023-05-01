@@ -36,9 +36,8 @@ if ($methode == "POST") {
         $query->execute([
             ":token" => $_SESSION["token"]
         ]);
-        header('Location: ../../systeme-billetterie/dashboard_admin.php');
-        exit(); // Coupe PHP
-        //        echo "Vous etes log";
+        header('Location: ../../systeme-billetterie/dashboard_user.php');
+        exit();
     } else {
         $erreur = "Identifiants incorrects !";
     }
@@ -46,50 +45,38 @@ if ($methode == "POST") {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$titre = "Connexion";
+include '../../tpl/auth_header.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="login_admin.css">
-</head>
+<div class="show_ticket_container">
 
-<body>
+    <h1>Connexion</h1>
 
-    <header>
-        <h1>Dauphinois</h1>
-        <nav>
-            <ul>
-                <li><a href="../../systeme-billetterie/index.php">Accueil</a></li>
-                <li><a href="show_ticket.php">Billets</a></li>
-                <li><a href="login.php">Admin</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1>Connectez-vous !</h1>
     <?php if ($erreur !== null) : ?>
         <p style="background: #FAA; color: red; padding: .5rem .75rem">
             <?= $erreur ?>
         </p>
     <?php endif; ?>
-    <form method="POST">
-        <label for="login">Identifiant</label>
-        <input type="text" id="login" name="login" required>
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" required>
 
-        <input type="submit" value="Connexion">
+    <form method="POST" class="show_ticket_form">
+        <div class="show_ticket_div">
+            <div class="show_ticket_form_input">
+                <label for="login">Identifiant :</label>
+                <label for="password">Mot de passe :</label>
+            </div>
+
+            <div class="show_ticket_form_input">
+                <input type="text" id="login" name="login" required>
+                <input type="password" id="password" name="password" required>
+            </div>
+        </div>
+        <div class="show_ticket_button">
+            <input type="submit" value="Connexion" class="show_ticket_btn">
+        </div>
     </form>
-    <?php if (isset($_SESSION["loggedin"])) {
-        echo ("
-            <button><a href='logout.php'>Deconnexion</a></button>
-            <button><a href='../../systeme-billetterie/dashboard_admin.php'>Dashboard</a></button>
-        ");
-    } ?>
-    <footer>
-        <p>&copy; 2023 Dauphinois. Tous droits réservés.</p>
-    </footer>
-</body>
+
+</div>
+
+<?php include '../../tpl/footer.php'; ?>

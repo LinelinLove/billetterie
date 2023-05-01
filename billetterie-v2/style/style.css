@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: lightsteelblue;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #000;
+    padding: 2rem 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    clear: both;
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 90px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    column-gap: 40px;
+}
+
+nav ul a,
+.billetterie a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+nav ul a:hover,
+.billetterie a:hover {
+    color: grey;
+}
+
+.billetterie a {
+    font-size: 30px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+
+/* index */
+
+.index_container {
+    width: fit-content;
+    margin: 50px auto;
+    position: relative;
+}
+
+.index_container .btn {
+    background-color: #ff4b4b;
+    color: #fff;
+    padding: 20px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.index_container .btn:hover {
+    background-color: #ff5c5c;
+    color: #383838;
+}
+
+.index_container .btn:active {
+    background-color: #ff2626;
+    color: #fff;
+}
+
+.index_bouton {
+    position: absolute;
+    bottom: 20%;
+    left: 80%;
+    transform: translateX(-50%);
+}
+
+/* show ticket */
+
+.show_ticket_container {
+    background-color: #333;
+    color: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    width: fit-content;
+    margin: 50px auto;
+    padding: 50px;
+    align-items: center;
+}
+
+.show_ticket_form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.show_ticket_div {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    column-gap: 10px;
+}
+
+.show_ticket_form_input {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: flex-end
+}
+
+.show_ticket_button {
+    align-self: center;
+}
+
+.show_ticket_btn {
+    background-color: #ff4b4b;
+    color: #fff;
+    padding: 20px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    font-size: 16px;
+}
+
+.show_ticket_btn:hover {
+    background-color: #ff5c5c;
+    color: #383838;
+}
+
+.show_ticket_btn:active {
+    background-color: #ff2626;
+    color: #fff;
+}
+
+/* dashboard client */
+
+.print_events {
+    /* background-color: #333; */
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    /* padding: 90px; */
+    border-radius: 30px;
+    /* color: white; */
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    text-align: left;
+    background-color: white;
+    color: black;
+}
+
+table th,
+table td {
+    padding: 15px 30px 15px 5px;
+}
+
+table th:not(:last-child),
+table td:not(:last-child) {
+    border-right: 1px solid #DDDDDD;
+
+}
+
+table>tbody>tr:not(:last-child)>td,
+table th {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+table tbody tr:hover {
+    background-color: #b7b7b7;
+}
+
+.UD {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+/* login */
+
+.login {
+    background-color: #333;
+    color: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    width: fit-content;
+    margin: 50px auto;
+    padding: 50px;
+    align-items: center;
+}
+
+/* dashboard user */
+
+.dashboard_user_container {
+    padding: 20px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.dashboard_event_create {
+    background-color: #ff4b4b;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    align-self: self-end;
+
+}
+
+.dashboard_event_create:hover {
+    background-color: #ff5c5c;
+    color: #383838;
+}
+
+.dashboard_event_create:active {
+    background-color: #ff2626;
+    color: #fff;
+}
+
+.dashboard_event_create a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 20px 30px;
+}
+
+input[name="inscrit"], .event_read {
+    background: linear-gradient(to bottom, #FEFEFE, #E7E7E7);
+    padding: 10px;
+    border-radius: 4px;
+    border-color: #DDDDDD;
+    cursor: pointer;
+    border-width: 1px;
+}
+
+input[name="inscrit"], .event_read {
+    background: linear-gradient(to bottom, #FEFEFE, #E7E7E7);
+    padding: 10px;
+    border-radius: 4px;
+    border-color: #DDDDDD;
+    cursor: pointer;
+    border-width: 1px;
+}
+
+input[name="Update"] {
+    background: linear-gradient(to bottom, #60C160, #52A552);
+    border-color: #4A944A;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border-width: 1px;
+}
+
+
+input[name="Update"]:hover {
+    background: linear-gradient(to top, #60C160, #52A552);
+}
+
+input[name="Cancelled"] {
+    background: linear-gradient(to bottom, #EE706C, #BE362F);
+    border-color: #AF3933;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border-width: 1px;
+}
+
+input[name="Cancelled"]:hover {
+    background: linear-gradient(to top, #EE706C, #BE362F);
+}
+
+/* event read */
+
+.event_read_div_back {
+    margin: 20px;
+    background-color: #ff4b4b;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    align-self: self-start;
+
+}
+
+.event_read_div_back:hover {
+    background-color: #ff5c5c;
+    color: #383838;
+}
+
+.event_read_div_back:active {
+    background-color: #ff2626;
+    color: #fff;
+}
+
+.event_read_div_back a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 10px 20px;
+}
+
+.event_read_container{
+    margin: 50px auto;
+}
