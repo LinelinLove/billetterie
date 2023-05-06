@@ -86,56 +86,68 @@ if ($methode == "POST") {
 }
 ?>
 
-<?php include '../tpl/header.php'; ?>
+<?php
+$titre = "Créer un évènement";
+include '../tpl/header.php'; ?>
 
-<form method="post">
+<div class="show_ticket_container">
+    <h1>Créer un évènement</h1>
 
-    <fieldset class="event">
+    <form method="post" class="show_ticket_form">
 
-        <legend>
-            Créer votre propre événement !
-        </legend>
+        <div class="show_ticket_div">
+            <div class="show_ticket_form_input">
+                <label for="name_event">Nom : </label>
+                <label for="date_event">Date : </label>
+                <label for="radio_event">Type : </label>
+            </div>
 
-        <div>
-            <label for="name_event">Nom : </label>
-            <input type="text" name="name_event" id="name_event" required>
+            <div class="show_ticket_form_input" style="align-items: flex-start;">
+                <input type="text" name="name_event" id="name_event" required>
+                <input type="date" name="date_event" id="date_event" required>
+
+                <div style="display: flex; flex-direction : column; row-gap: 10px;">
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_1" value="Concert" required>
+                        <label for="radio_event_1">Concert</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_2" value="Convention">
+                        <label for="radio_event_2">Convention</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_3" value="Exposition">
+                        <label for="radio_event_3">Exposition</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_4" value="Tournoi">
+                        <label for="radio_event_4">Tournoi</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_5" value="Compétition">
+                        <label for="radio_event_5">Compétition</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="radio_event" id="radio_event_6" value="Avant-premiere">
+                        <label for="radio_event_6">Avant-première</label>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div>
-            <label for="date_event">Date de l'événement : </label>
-            <input type="date" name="date_event" id="date_event" required>
+        <div class="show_ticket_button">
+            <input type="submit" name="creer_evenement" value="Créer" class="show_ticket_btn" />
         </div>
 
-        <div>
-            <label for="radio_event_1">
-                <input type="radio" name="radio_event" id="radio_event_1" value="Concert" required>Concert
-            </label>
-            <label for="radio_event_2">
-                <input type="radio" name="radio_event" id="radio_event_2" value="Convention">Convention
-            </label>
-            <label for="radio_event_3">
-                <input type="radio" name="radio_event" id="radio_event_3" value="Exposition">Exposition
-            </label>
-            <label for="radio_event_4">
-                <input type="radio" name="radio_event" id="radio_event_4" value="Tournoi">Tournoi
-            </label>
-            <label for="radio_event_5">
-                <input type="radio" name="radio_event" id="radio_event_5" value="Compétition">Compétition
-            </label>
-            <label for="radio_event_6">
-                <input type="radio" name="radio_event" id="radio_event_6" value="Avant-premiere">Avant-première
-            </label>
+    </form>
 
-        </div>
-        <div>
-            <button for="button_return">
-                <a href="dashboard_user.php" class="button_event" name="button_return">Retour</a>
-            </button>
-            <button>
-                <type="submit" name="creer_evenement">Créer
-            </button>
-        </div>
-    </fieldset>
-</form>
+    <div style="align-self: flex-start;">
+        <a href="dashboard_user.php" class="show_ticket_btn">Retour</a>
+    </div>
+
+</div>
 
 <?php include '../tpl/footer.php'; ?>

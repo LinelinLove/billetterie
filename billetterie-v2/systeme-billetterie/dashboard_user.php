@@ -101,6 +101,7 @@ function print_events($evenements, $order, $login)
                                     </form>
                                     <form method="post" action="event_delete.php">
                                         <input type="hidden" name="id" value="<?php echo $evenement["id"]; ?>" />
+                                        <input type="hidden" name="name_event" value="<?php echo $evenement["name"]; ?>" />
                                         <input type="submit" name="Cancelled" value="Annuler l'événement" />
                                     </form>
                                 </div>

@@ -102,6 +102,8 @@ function print_inscrit($id_event, $affichage, $event_id, $name_event)
                     <td>
                         <form method="post" action="event_unsuscribe.php">
                             <!-- id client -->
+                            <input type="hidden" name="client_last_name" value="<?php echo $affiche["last_name"]; ?>" />
+                            <input type="hidden" name="client_first_name" value="<?php echo $affiche["first_name"]; ?>" />
                             <input type="hidden" name="id_client" value="<?php echo $affiche["id"]; ?>" />
                             <input type="hidden" name="name_event" value="<?php echo $name_event; ?>" />
                             <input type="hidden" name="id" value="<?php echo $event_id; ?>" />

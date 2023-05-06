@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     // Dans ce cas là, la personne n'est pas connectée, on la redirige.
-    header('Location: login_admin.php');
+    header('Location: ../systeme-authentification/users/login.php');
     exit(); // Coupe PHP
 }
 
@@ -30,43 +30,48 @@ if ($methode == "POST") {
             ":name_update" => $name_update,
             ":date_event_update" => $date_event_update,
         ]);
-        header('Location: dashboard_admin.php');
+        header('Location: dashboard_user.php');
         exit();
     }
 }
 ?>
 
-<?php include '../tpl/header.php'; ?>
+<?php 
+$titre = "Modifier un évènement";
+include '../tpl/header.php'; ?>
 
-<div class="form">
+<div class="show_ticket_container">
     <h2>Modifier un évènement</h2>
 
-    <form method="post" action="event_update.php">
-        <div class="create">
+    <form method="post" action="event_update.php" class="show_ticket_form">
 
-            <div class="inputForm">
 
-                <div>
-                    <label for="name_event_update">Nom : </label>
-                    <input type="text" name="name_event_update" id="name_event_update" value="<?= $name ?>" required>
-                </div>
+        <div class="show_ticket_div">
 
-                <div>
-                    <label for="date_event_update">Date de l'événement : </label>
-                    <input type="date" name="date_event_update" id="date_event_update" value="<?= $date_event ?>" required>
-                </div>
+            <div class="show_ticket_form_input">
+                <label for="name_event_update">Nom : </label>
+                <label for="date_event_update">Date de l'événement : </label>
             </div>
 
-            <input type="hidden" name="id" value="<?= $id ?>" />
-            <input type="hidden" name="name_event" value="<?= $name ?>" />
-            <input type="hidden" name="date_event" value="<?= $date_event ?>" />
-
-            <div>
-                <button><a class="btn" href="dashboard_admin.php">Retour</a></button>
-                <input type="submit" name="updated" value="Mettre à jour" />
+            <div class="show_ticket_form_input" style="align-items: flex-start">
+                <input type="text" name="name_event_update" id="name_event_update" value="<?= $name ?>" required>
+                <input type="date" name="date_event_update" id="date_event_update" value="<?= $date_event ?>" required>
             </div>
         </div>
+
+        <input type="hidden" name="id" value="<?= $id ?>" />
+        <input type="hidden" name="name_event" value="<?= $name ?>" />
+        <input type="hidden" name="date_event" value="<?= $date_event ?>" />
+
+        <div class="show_ticket_button">
+            <input type="submit" name="updated" value="Mettre à jour" class="show_ticket_btn" />
+        </div>
+        
     </form>
+    
+    <div style="align-self: flex-start">
+        <a class="show_ticket_btn" href="dashboard_user.php">Retour</a>
+    </div>
 
 </div>
 

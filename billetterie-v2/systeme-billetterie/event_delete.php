@@ -2,8 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    // Dans ce cas là, la personne n'est pas connectée, on la redirige.
-    header('Location: login_admin.php');
+    header('Location: ../systeme-authentification/users/login.php');
     exit(); // Coupe PHP
 }
 
@@ -11,6 +10,7 @@ $pdo = new PDO("mysql:host=localhost:3306;dbname=billetterie_hetic", "root", "")
 $erreur = null;
 $methode = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 $id = filter_input(INPUT_POST, "id");
+$name_event = filter_input(INPUT_POST, "name_event");
 $status = "Annuler";
 
 if ($methode == "POST") {
@@ -24,32 +24,35 @@ if ($methode == "POST") {
             ":id" => $id,
             ":status" => $status
         ]);
-        header('Location: dashboard_admin.php');
+        header('Location: dashboard_user.php');
         exit();
     }
 }
 ?>
 
-<?php include '../tpl/header.php'; ?>
+<?php
+$titre = "Annuler un évènement";
+include '../tpl/header.php'; ?>
 
-<div class="form">
+<div class="show_ticket_container">
     <h2>Annuler un évènement</h2>
     <div class="cancelled">
         <p class="text_cancelled">
-            Êtes-vous sûr de vouloir annuler cet évènement <?= $id ?> ?
+            Êtes-vous sûr de vouloir annuler l'évènement "<?= $name_event ?>" ?
         </p>
     </div>
 
     <form method="POST" action="event_delete.php">
         <input type="hidden" name="id" value="<?= $id ?>" />
         <div>
-            <button>
-                <a href="dashboard_admin.php">Retour</a>
-            </button>
-            <input type="submit" name="cancelled" value="Annuler" />
+            <input type="submit" name="cancelled" value="Annuler l'évènement" class="show_ticket_btn" />
         </div>
-</div>
 
-</form>
+    </form>
+
+    <div style="align-self: flex-start;">
+        <a href="dashboard_user.php" class="show_ticket_btn">Retour</a>
+    </div>
+
 </div>
 <?php include '../tpl/footer.php'; ?>
