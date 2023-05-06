@@ -114,7 +114,7 @@ function print_events($evenements, $order, $login)
                         if ($evenement["status"] == "À venir" || $evenement["status"] == "En cours") {
 
                         ?>
-                            <form method="post" action="inscription.php">
+                            <form method="post" action="register_customer.php">
                                 <input type="submit" name="inscrit" value="Inscrire un client">
                                 <input type="hidden" name="name_event" value="<?php echo $evenement["name"]; ?>" />
                                 <input type="hidden" name="id" value="<?php echo $evenement["id"]; ?>" />

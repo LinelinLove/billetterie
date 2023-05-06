@@ -70,7 +70,7 @@ include '../tpl/header.php';
 
     <h1>Votre billet</h1>
 
-    <form method="POST" action="show_ticket_client.php" class="show_ticket_form">
+    <form method="POST" action="show_ticket_customer.php" class="show_ticket_form">
 
         <div class="show_ticket_div">
             <div class="show_ticket_form_input">
@@ -79,8 +79,8 @@ include '../tpl/header.php';
             </div>
 
             <div class="show_ticket_form_input">
-                <input type="text" id="last_name" name="last_name">
-                <input type="text" id="pTicketId" name="pTicketId" maxlength="10">
+                <input type="text" id="last_name" name="last_name" required>
+                <input type="text" id="pTicketId" name="pTicketId" maxlength="10" required>
             </div>
         </div>
 

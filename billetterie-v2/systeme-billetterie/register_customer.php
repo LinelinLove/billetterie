@@ -71,7 +71,7 @@ if ($methode == "POST") {
                 $resultat_is_inscrit = $requete_is_inscrit->fetchAll();
 
                 if (count($resultat_is_inscrit) > 0) {
-                    $erreur = "Le client est déjà inscrit à cet évènenment.";
+                    $erreur = "Le client est déjà inscrit à cet évènement.";
                 }
                 // sinon user_id existe déja mais il n'est pas inscrit à cet evènement
                 else {
@@ -141,7 +141,7 @@ if ($methode == "POST") {
 
                 generate_ticket($pdo, $event_id);
 
-                header("Location: dashboard_admin.php");
+                header("Location: dashboard_user.php");
                 exit();
             }
         }
@@ -149,35 +149,52 @@ if ($methode == "POST") {
 }
 ?>
 
-<?php include '../tpl/header.php'; ?>
+<?php
+$titre = "Incription";
+include '../tpl/header.php'; ?>
 
-<h1>Inscrire un client à l'évènement
-</h1>
-<?php if ($erreur !== null) : ?>
-    <p style="background: #FAA; color: red; padding: .5rem .75rem">
-        <?= $erreur ?>
-    </p>
-<?php endif; ?>
-<form method="POST">
+<div class="show_ticket_container">
+    <h1>Inscrire un client à l'évènement "<?= $name_event ?>"
+    </h1>
+    <?php if ($erreur !== null) : ?>
+        <p style="background: #FAA; color: red; padding: .5rem .75rem">
+            <?= $erreur ?>
+        </p>
+    <?php endif; ?>
 
-    <label for="first_name">Prénom</label>
-    <input type="text" id="first_name" name="first_name">
+    <form method="POST" class="show_ticket_form">
 
-    <label for="last_name">Nom</label>
-    <input type="text" id="last_name" name="last_name">
+        <div class="show_ticket_div">
 
-    <label for="email">Email</label>
-    <input type="text" id="email" name="email">
+            <div class="show_ticket_form_input">
+                <label for="first_name">Prénom : </label>
+                <label for="last_name">Nom : </label>
+                <label for="email">E-mail : </label>
+                <label for="phone_number">Téléphone : </label>
+            </div>
 
-    <label for="phone_number">Numero de telephone</label>
-    <input type="text" id="phone_number" name="phone_number">
-    <input type="hidden" name="name_event" value="<?php echo $name_event; ?>">
-    <input type="hidden" name="id" value="<?php echo $event_id; ?>">
-    <input type="submit" name="inscrire" value="Inscrire">
-</form>
-<div>
-    <a href="dashboard_admin.php">Retour</a>
+            <div class="show_ticket_form_input">
+                <input type="text" id="first_name" name="first_name" required>
+                <input type="text" id="last_name" name="last_name" required>
+                <input type="email" id="email" name="email" required>
+                <input type="phone" id="phone_number" name="phone_number" maxlength="12" required>
+            </div>
+
+
+            <input type="hidden" name="name_event" value="<?php echo $name_event; ?>">
+            <input type="hidden" name="id" value="<?php echo $event_id; ?>">
+
+        </div>
+
+        <div class="show_ticket_button">
+            <input type="submit" name="inscrire" value="Inscrire" class="show_ticket_btn">
+        </div>
+
+    </form>
+
+    <div style="align-self: flex-start">
+        <a href="dashboard_user.php" class="show_ticket_btn">Retour</a>
+    </div>
 </div>
-
 
 <?php include '../tpl/footer.php'; ?>
