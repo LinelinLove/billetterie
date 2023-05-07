@@ -40,14 +40,6 @@ ORDER BY $sort $order
 $requete_event->execute();
 $evenements = $requete_event->fetchAll(PDO::FETCH_ASSOC);
 
-// recup de l'utilisateur
-$requete_admins = $pdo->prepare("
-SELECT * FROM admins WHERE admins.login = '$login';
-");
-
-$requete_admins->execute();
-$user = $requete_admins->fetchAll(PDO::FETCH_ASSOC);
-
 //recup l'id de l'event
 $requete_read_inscrit = $pdo->prepare("
 SELECT * FROM events_users WHERE event_id = '$event_id';

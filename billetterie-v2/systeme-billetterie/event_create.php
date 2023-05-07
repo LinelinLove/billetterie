@@ -47,42 +47,38 @@ if ($methode == "POST") {
         $nameEvent = $_POST['name_event'];
         if (!empty($nameEvent)) {
             if (isBlacklisted($nameEvent)) {
-                $errorMessage = "Le nom de l'évènement ne doit pas contenir les mots suivants : Évènement, Convention, Exposition, Concert, Tournoi, Compétition, Avant-première.";
-                echo $errorMessage;
+                $erreur = "Le nom de l'évènement ne doit pas contenir les mots suivants :<br/>Évènement, Convention, Exposition, Concert, Tournoi, Compétition, Avant-première.";
             } else {
-                $successMessage = "L'événement a été créé avec succès.";
-                echo $successMessage;
+
+                if ($date_create < $date_event) {
+                    $status = "À venir";
+                } else if ($date_create > $date_event) {
+                    $status = "Passé";
+                } else if ($date_create == $date_event) {
+                    $status = "En cours";
+                }
+
+                $requete = $pdo->prepare("
+                    INSERT INTO events (name, date_event, date_create, creator, qrcode, status, type) VALUES(:name, :date_event, :date_create, :login, :qrcode, :status, :type)
+                ");
+
+                $requete->execute([
+                    ":name" => $name,
+                    ":date_event" => $date_event,
+                    ":date_create" => $date_create,
+                    ":login" => $login,
+                    ":qrcode" => $qrcode,
+                    ":status" => $status,
+                    ":type" => $type,
+                ]);
+
+                header('Location: dashboard_user.php');
+                exit();
             }
         } else {
-            $errorMessage = "Veuillez saisir un nom pour l'événement.";
-            echo $errorMessage;
+            $erreur = "Veuillez saisir un nom pour l'événement.";
         }
     }
-
-    if ($date_create < $date_event) {
-        $status = "À venir";
-    } else if ($date_create > $date_event) {
-        $status = "Passé";
-    } else if ($date_create == $date_event) {
-        $status = "En cours";
-    }
-
-    $requete = $pdo->prepare("
-        INSERT INTO events (name, date_event, date_create, creator, qrcode, status, type) VALUES(:name, :date_event, :date_create, :login, :qrcode, :status, :type)
-    ");
-
-    $requete->execute([
-        ":name" => $name,
-        ":date_event" => $date_event,
-        ":date_create" => $date_create,
-        ":login" => $login,
-        ":qrcode" => $qrcode,
-        ":status" => $status,
-        ":type" => $type,
-    ]);
-
-    header('Location: dashboard_user.php');
-    exit();
 }
 ?>
 
@@ -92,6 +88,12 @@ include '../tpl/header.php'; ?>
 
 <div class="show_ticket_container">
     <h1>Créer un évènement</h1>
+
+    <?php if ($erreur !== null) : ?>
+        <p style="background: #FAA; color: red; padding: .5rem .75rem">
+            <?= $erreur ?>
+        </p>
+    <?php endif; ?>
 
     <form method="post" class="show_ticket_form">
 

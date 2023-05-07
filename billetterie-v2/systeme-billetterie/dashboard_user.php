@@ -36,15 +36,6 @@ $requete_event->execute();
 
 $evenements = $requete_event->fetchAll(PDO::FETCH_ASSOC);
 
-// recup de l'utilisateur
-$requete_admins = $pdo->prepare("
-SELECT * FROM admins WHERE admins.login = '$login';
-");
-
-$requete_admins->execute();
-
-$user = $requete_admins->fetchAll(PDO::FETCH_ASSOC);
-
 function print_events($evenements, $order, $login)
 {
     if (count($evenements) > 0) {
@@ -146,14 +137,14 @@ include '../tpl/header.php';
 <div class="dashboard_user_container">
 
     <h1>Bonjour <?= $login ?> !</h1>
+    <button class="dashboard_event_create">
+        <a href="event_create.php">Créer un évènement</a>
+    </button>
 
     <div class="print_events">
         <h2>Liste des évènements :</h2>
         <?= print_events($evenements, $order, $login) ?>
     </div>
-    <button class="dashboard_event_create">
-        <a href="event_create.php">Créer un évènement</a>
-    </button>
 </div>
 
 <?php include '../tpl/footer.php'; ?>
